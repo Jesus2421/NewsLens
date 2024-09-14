@@ -46,4 +46,5 @@ NewsLens es una aplicación diseñada para fomentar el pensamiento crítico al o
 
 Para más detalles sobre cómo contribuir, consulta nuestro CONTRIBUTING.md.
 ## Licencia
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.   
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles. 
+### Autor Jesus2421  
