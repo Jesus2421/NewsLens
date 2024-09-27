@@ -1,5 +1,4 @@
 # Programa Principal
-# Programa Principal
 from app import utils
 
 def main():
