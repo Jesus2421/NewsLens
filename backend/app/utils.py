@@ -1,5 +1,5 @@
-import bs4
-from bs4 import BeautifulSoup as soup
+import bs4 # type: ignore
+from bs4 import BeautifulSoup as soup # type: ignore
 from urllib.request import urlopen
 
 def get_google_news():
