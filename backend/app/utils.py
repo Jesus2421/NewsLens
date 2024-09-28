@@ -21,3 +21,4 @@ def get_google_news():
         noticias.append(noticia)
 
     return noticias
+
