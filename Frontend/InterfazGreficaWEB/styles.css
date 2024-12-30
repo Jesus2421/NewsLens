@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+#news-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#bias-filter {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.news-item {
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 15px;
+    width: 300px;
+    border-radius: 5px;
+}
+/* Estilos para el formulario de contacto */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #007BFF; /* Cambia el color del borde al enfocar */
+    outline: none; /* Elimina el contorno predeterminado */
+}
+
+button {
+    background-color: #007BFF; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #333;
+    color: #fff;
+}

@@ -16,7 +16,6 @@ class ConectorAPI():
             noticia = {
                 'title': item.title.text,
                 'link': item.link.text,
-                'description': item.description.text,
                 'pubDate': item.pubDate.text
             }
             noticias.append(noticia)

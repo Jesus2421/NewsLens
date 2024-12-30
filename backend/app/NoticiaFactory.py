@@ -1,14 +1,13 @@
 import re
 class Noticia:
-    __slots__ = ('titulocompleto', 'titulo', 'medio', 'link', 'descripcion', 'data_publicacion')
+    __slots__ = ('titulocompleto', 'titulo', 'medio', 'link', 'data_publicacion')
 
-    def __init__(self, titulocompleto, link, descripcion, data_publicacion):
+    def __init__(self, titulocompleto, link, data_publicacion):
         self.titulocompleto = titulocompleto  # Definir el atributo
         self.link = link
         self.titulo = None
         self.medio = None
         self.separar_titulo_y_medio()
-        self.descripcion = descripcion
         self.data_publicacion = data_publicacion
 
     def separar_titulo_y_medio(self):
@@ -23,7 +22,6 @@ class Noticia:
         return (f"Título: {self.titulo}\n"
                 f"Medio: {self.medio}\n"
                 f"Enlace: {self.link}\n"
-                f"Descripción: {self.descripcion}\n"
                 f"Fecha: {self.data_publicacion}\n")
 
 class NoticiaFactory:
@@ -35,7 +33,6 @@ class NoticiaFactory:
             noticia = Noticia(
                 titulocompleto=dato.get("title"),  # Cambiado "tittle" a "title"
                 link=dato.get("link"),
-                descripcion=dato.get("description"),
                 data_publicacion=dato.get("pubDate")  # Asegúrate de usar 'data_publicacion'
             )
             noticias.append(noticia)  # Agregar la noticia a la lista
