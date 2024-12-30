@@ -1,4 +1,4 @@
-# NewsLens 
+# LibrePensadores
 
 NewsLens es una aplicación diseñada para fomentar el pensamiento crítico al ofrecer noticias desde múltiples perspectivas y fuentes. Su objetivo es proporcionar una visión más completa y equilibrada de los eventos actuales, rompiendo las cámaras de eco y evitando la polarización.
 
