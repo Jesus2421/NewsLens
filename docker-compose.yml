@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  news-collector:
+    build: ./news-collector
+    container_name: news-collector
+    ports:
+      - "5001:5001"
+
+  news-classifier:
+    build: ./news-classifier
+    container_name: news-classifier
+    ports:
+      - "5002:5002"
+
+  news-api:
+    build: ./news-api
+    container_name: news-api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - news-collector
+      - news-classifier

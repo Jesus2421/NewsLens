@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewsLens</title>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <title>Libre Pensadores</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="spectrum.css">
 </head>
 <body>
     <header>
-        <h1>NewsLens</h1>
+        <h1>Libre Pensadores</h1>
         <nav>
             <ul>
                 <li><a href="#home">Inicio</a></li>
@@ -21,7 +23,7 @@
     
     <main>
         <section id="home">
-            <h2>Bienvenido a NewsLens</h2>
+            <h2>Bienvenido a su tablon de noticias</h2>
             <p>Tu fuente de noticias desde múltiples perspectivas.</p>
         </section>
         
@@ -31,17 +33,33 @@
                 <label for="bias-filter">Filtrar por sesgo político:</label>
                 <select id="bias-filter">
                     <option value="all">Todos</option>
-                    <option value="left">Izquierda</option>
-                    <option value="center">Centro</option>
-                    <option value="right">Derecha</option>
+                    <option value="izquierda">Izquierda</option>
+                    <option value="centro">Centro</option>
+                    <option value="derecha">Derecha</option>
                 </select>
             </div>
+
+            <!-- Gráfico de Espectro Político -->
+            <div class="spectrum-container">
+                <div class="spectrum-bar">
+                    <div class="spectrum-segment left-gradient">
+                        <span class="label">IZQUIERDA</span>
+                    </div>
+                    <div class="spectrum-segment center-block">
+                        <span class="label">CENTRO</span>
+                    </div>
+                    <div class="spectrum-segment right-gradient">
+                        <span class="label">DERECHA</span>
+                    </div>
+                </div>
+            </div>
+
             <div id="news-container"></div>
         </section>
         
         <section id="about">
             <h2>Acerca de Nosotros</h2>
-            <p>NewsLens promueve el pensamiento crítico y la diversidad de opiniones.</p>
+            <p>Libre Pensadores promueve el pensamiento crítico y la diversidad de opiniones.</p>
         </section>
         
         <section id="contact">
@@ -65,7 +83,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2024 NewsLens. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Libre Pensadores. Todos los derechos reservados.</p>
     </footer>
 
     <script src="script.js"></script>

@@ -1,68 +1,137 @@
 def clasificar_sesgo(medio):
+    # Normalizar entrada
+    if not medio:
+        return "desconocido"
+    
+    medio_norm = medio.lower().strip()
+    
+    # Diccionario normalizado (claves en minúsculas)
     media_sesgos = {
-        "The Wall Street Journal":"centro-derecha",
-        "ABC7 Los Angeles":"Centro",
-        "The Hill":"Centro-Derech",
-        "IGN":"Neutral",
-        "The Globe and Mail":"centro-izquierda",
-        "Deadline":"Neutral",
-        "Good News Network":"Neutral",
-        "Reuters.com": "Centro",
-        "engadget":"neutral",
-        "haaretz":"izquierda",
-        "The Associated Press":"neutral",
-        "ABC News":"centro",
-        "Politico":"centro",
-        "POLITICO Europe":"centro",
-        "Shore Daily News":"derecha",
-        "New York Post": "derecha",
-        "SciTechDaily": "neutral",
-        "The New York Times": "centro",
-        "The Washington Post":"centro",
-        "Fox News": "derecha",
-        "Axios":"centro",
-        "Forbes": "derecha",
-        "CNN": "izquierda",
-        "BBC.com": "centro",
-        "The Verge" :"centro",
-        "Al Jazeera": "centro",
-        "The Guardian": "izquierda",
-        "Wall Street Journal": "derecha",
+        # Medios Internacionales
+        "the wall street journal": "derecha",
+        "abc7 los angeles": "centro",
+        "the hill": "derecha",
+        "ign": "centro",
+        "the globe and mail": "izquierda",
+        "deadline": "centro",
+        "good news network": "centro",
+        "reuters": "centro",
+        "reuters.com": "centro",
+        "engadget": "centro",
+        "haaretz": "izquierda",
+        "the associated press": "centro",
+        "ap": "centro",
+        "abc news": "centro",
+        "politico": "centro",
+        "politico europe": "centro",
+        "shore daily news": "derecha",
+        "new york post": "derecha",
+        "scitechdaily": "centro",
+        "the new york times": "izquierda",
+        "nytimes": "izquierda",
+        "the washington post": "izquierda",
+        "fox news": "derecha",
+        "axios": "centro",
+        "forbes": "derecha",
+        "cnn": "izquierda",
+        "bbc": "centro",
+        "bbc.com": "centro",
+        "the verge": "centro",
+        "al jazeera": "izquierda",
+        "the guardian": "izquierda",
+        
+        # Medios en Español (Comunes en Google News AR/ES)
+        "infobae": "derecha",
+        "clarín": "derecha",
+        "clarin": "derecha",
+        "la nación": "centro",
+        "la nacion": "centro",
+        "página 12": "izquierda",
+        "pagina 12": "izquierda",
+        "el destape": "izquierda",
+        "c5n": "izquierda",
+        "tn": "izquierda",
+        "todo noticias": "centro",
+        "perfil": "izquierda",
+        "ámbito": "izquierda",
+        "ambito": "izquierda",
+        "cronista": "centro",
+        "el país": "izquierda",
+        "el pais": "izquierda",
+        "el mundo": "centro",
+        "abc": "derecha",
+        "la vanguardia": "derecha",
+        "rt": "izquierda",
+        "telesur": "izquierda",
+        "infobae américa": "derecha"
     }
-    # Verificar si el nombre del medio contiene "Sports" (ignorando mayúsculas y minúsculas)
-    if "sports" in medio.lower() or "science" in medio.lower() or "The daily galaxy" in medio.lower():
-        return "No es un medio con un sesgo politico claro"
-    return media_sesgos.get(medio, "desconocido")  # Retorna "desconocido" si el medio no está en el mapeo
+    
+    # Verificar palabras clave de exclusión
+    if any(x in medio_norm for x in ["sports", "science", "daily galaxy", "espn", "marca", "olé"]):
+        return "centro" # Asumimos centro/neutral para deportes/ciencia
+
+    # Búsqueda exacta o parcial
+    if medio_norm in media_sesgos:
+        return media_sesgos[medio_norm]
+    
+    # Búsqueda parcial (si "Infobae Argentina" contiene "infobae")
+    for key, value in media_sesgos.items():
+        if key in medio_norm:
+            return value
+            
+    return "desconocido"
 
 def clasificar_titulo(titulo):
+    if not titulo:
+        return "indeterminado"
+        
+    titulo_norm = titulo.lower()
+    
     palabras_clave = {
-        "izquierda": ["igualdad", "derechos", "cambio climático", "progresista", "inclusión"],
-        "derecha": ["libertad", "mercado", "seguridad", "conservador", "patriotismo"],
-        "centro": ["consenso", "neutralidad", "reforma", "diálogo", "moderación", "equilibrio", "justicia", "transparencia"]
+        "izquierda": [
+            "igualdad", "derechos", "cambio climático", "progresista", "inclusión", 
+            "sindicato", "trabajadores", "social", "género", "feminismo", "ddhh",
+            "ajuste", "represión", "neoliberal", "fmi"
+        ],
+        "derecha": [
+            "libertad", "mercado", "seguridad", "conservador", "patriotismo", 
+            "inversión", "propiedad", "empresa", "déficit", "inflación", "cepo",
+            "terrorismo", "orden", "policía"
+        ],
+        "centro": [
+            "consenso", "neutralidad", "reforma", "diálogo", "moderación", 
+            "equilibrio", "justicia", "transparencia", "acuerdo", "oficial",
+            "anuncio", "informe", "reporte"
+        ]
     }
-    conteo = {"izquierda": 0, "derecha": 0}
+    
+    conteo = {"izquierda": 0, "derecha": 0, "centro": 0}
     
     for sesgo, palabras in palabras_clave.items():
-        conteo[sesgo] = sum(1 for palabra in palabras if palabra.lower() in titulo.lower())
+        conteo[sesgo] = sum(1 for palabra in palabras if palabra in titulo_norm)
     
     # Retorna el sesgo con más coincidencias
-    if conteo["izquierda"] > conteo["derecha"]:
-        return "izquierda"
-    elif conteo["derecha"] > conteo["izquierda"]:
-        return "derecha"
-    else:
-        return "indeterminado"  # Si hay empate o no hay coincidencias
+    # Usamos una función lambda simple para evitar problemas de tipado
+    max_sesgo = max(conteo, key=lambda k: conteo[k])
     
+    if conteo[max_sesgo] > 0:
+        return max_sesgo
+    else:
+        return "indeterminado"
+
 def clasificar_noticia(medio, titulo):
-        sesgo_medio = clasificar_sesgo(medio)
-        sesgo_titulo = clasificar_titulo(titulo)
-        # Si ambos coinciden, usa ese sesgo
-        if sesgo_medio == sesgo_titulo:
-            return sesgo_medio
-        # Si no coinciden, prioriza el sesgo del medio
-        if sesgo_medio != "desconocido":
-            return sesgo_medio
-        # Si el medio es desconocido, usa el sesgo del título
+    sesgo_medio = clasificar_sesgo(medio)
+    sesgo_titulo = clasificar_titulo(titulo)
+    
+    # Lógica de decisión jerárquica
+    
+    # 1. Si el medio es conocido, su línea editorial suele pesar más
+    if sesgo_medio != "desconocido":
+        return sesgo_medio
+        
+    # 2. Si el medio es desconocido, intentamos por el título
+    if sesgo_titulo != "indeterminado":
         return sesgo_titulo
-
-
+        
+    # 3. Si nada funciona, por defecto "centro" (para que se muestre en el filtro 'all' y 'center')
+    return "centro"
